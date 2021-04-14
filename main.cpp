@@ -105,21 +105,21 @@ enum Figure{
 pair<uint32_t, uint32_t> JumpToSquareFromStart(const vector<vector<bool> > &image, size_t n) {
     return make_pair(
             start_x + (line_width + square_width) * (n % field_size),
-            start_y + line_width * (n / field_size) + square_height * (n / field_size - ((n / field_size > 0)? 1 : 0)) + square_height / 2 // хотим приходить в середину клетки
+            start_y + (line_width + square_height) * (n / field_size) + square_height / 2 // хотим приходить в середину клетки
             );
 }
 
 Figure DetectFigure(const vector<vector<bool> > &image, uint32_t x, uint32_t y) {
     bool line_crossed = false;
-    for (uint32_t i=x; i > x - line_width / 2; --i) {
+    for (uint32_t i=x; i > x - square_width / 2; --i) {
         if (!image[y][i]) {
             line_crossed = true;
         }
     }
-    if (line_crossed && image[y][x - line_width / 2]) {
+    if (line_crossed && image[y][x - square_width / 2]) {
         return Zero;
     }
-    if (!image[y][x - line_width / 2] || !image[y][x - line_width / 2 - 1]) {
+    if (!image[y][x - square_width / 2] || !image[y][x - square_width / 2 - 1]) {
         return Cross;
     }
     return Empty;
