@@ -128,7 +128,7 @@ Figure DetectFigure(const vector<vector<bool> > &image, uint32_t x, uint32_t y) 
 pair<uint32_t, uint32_t> GetCenterOfSquare(size_t n) {
     return make_pair(
             start_x + (line_width + square_width) * (n % field_size) - square_width / 2,
-            start_y + line_width * (n / field_size) + square_height * (n / field_size - 1) + square_height / 2
+            start_y + (line_width + square_height) * (n / field_size) + square_height / 2
             );
 }
 
